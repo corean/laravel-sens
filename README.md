@@ -30,7 +30,7 @@ Before you get started, you need the following:
 You can install the package via composer:
 
 ``` bash
-composer require seungmun/laravel-sens
+composer require corean/laravel-sens
 ```
 
 The package will automatically register itself.
