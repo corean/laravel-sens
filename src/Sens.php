@@ -215,8 +215,11 @@ abstract class Sens implements SensContract
         array_push($buffer, $timestamp);
         array_push($buffer, $this->getAccessKey());
 
-        $secretKey = utf8_encode($this->getSecretKey());
-        $message = utf8_encode(implode("\n", $buffer));
+        // $secretKey = utf8_encode($this->getSecretKey()); // utf8_encode() is deprecated
+        // $message = utf8_encode(implode("\n", $buffer)); // utf8_encode() is deprecated
+        $secretKey = mb_convert_encoding($this->getSecretKey(), 'UTF-8', 'auto');
+        $message = mb_convert_encoding(implode("\n", $buffer), 'UTF-8', 'auto');
+
         $hash = hex2bin(hash_hmac('sha256', $message, $secretKey));
 
         return base64_encode($hash);
